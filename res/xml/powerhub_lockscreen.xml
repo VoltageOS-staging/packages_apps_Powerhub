@@ -51,7 +51,13 @@
         android:key="lockscreen_category"
         android:title="@string/ls_category">
 
-	<ListPreference
+    <com.power.hub.preferences.SystemSettingSwitchPreference
+        android:key="enable_ripple_effect"
+        android:title="@string/enable_fingerprint_ripple_effect_title"
+        android:summary="@string/enable_fingerprint_ripple_effect_summary"
+        android:defaultValue="true" />
+
+    <ListPreference
         android:key="torch_power_button_gesture"
         android:title="@string/torch_power_button_gesture_title"
         android:entries="@array/torch_power_button_gesture_entries"
