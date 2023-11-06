@@ -183,13 +183,6 @@
     <string name="volume_button_music_control_title">Skip tracks with volume buttons</string>
     <string name="volume_button_music_control_summary">Long press volume up for skipping to the next track and vice-versa</string>
 
-    <!-- Torch Power button gestures -->
-    <string name="torch_power_button_gesture_title">Toggle torch when screen off</string>
-    <string name="torch_power_button_gesture_none">Disabled</string>
-    <string name="torch_power_button_gesture_dt">Double tap power button (slower single tap response), Disables double power tap for camera.</string>
-    <string name="torch_power_button_gesture_dt_toast">Jump to camera gesture is now disabled</string>
-    <string name="torch_power_button_gesture_lp">Long press power button</string>
-
     <!-- Network traffic -->
     <string name="network_traffic_settings_title">Network traffic monitor</string>
     <string name="network_traffic_settings_summary">Display and customize current network traffic levels</string>
