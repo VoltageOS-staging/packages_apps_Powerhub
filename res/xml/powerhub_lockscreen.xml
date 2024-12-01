@@ -78,6 +78,12 @@
         <PreferenceCategory
         android:title="@string/weather_category_title">
 
+            <com.voltage.support.preferences.SecureSettingSwitchPreference
+                android:key="lockscreen_smartspace_enabled"
+                android:title="@string/lockscreen_smartspace_title"
+                android:summary="@string/lockscreen_smartspace_summary"
+                android:defaultValue="false" />
+
             <com.voltage.support.preferences.SystemSettingSwitchPreference
                 android:key="lockscreen_weather_enabled"
                 android:title="@string/lockscreen_weather_title"

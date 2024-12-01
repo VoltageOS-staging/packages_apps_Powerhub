@@ -38,6 +38,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.SwitchPreferenceCompat;
 import android.os.SystemProperties;
 import android.provider.Settings;
 import com.android.settings.R;
@@ -63,6 +64,7 @@ public class LockScreenSettings extends SettingsPreferenceFragment implements
 
     private static final String FINGERPRINT_SUCCESS_VIB = "fingerprint_success_vib";
     private static final String FINGERPRINT_ERROR_VIB = "fingerprint_error_vib";
+    private static final String KEY_SMARTSPACE = "lockscreen_smartspace_enabled";
 
     private FingerprintManager mFingerprintManager;
     private SwitchPreference mFingerprintSuccessVib;
@@ -72,6 +74,7 @@ public class LockScreenSettings extends SettingsPreferenceFragment implements
     private static final String UDFPS_CATEGORY = "udfps_category";
 
     private Preference mWeather;
+    private SwitchPreferenceCompat mSmartspace;
     private OmniJawsClient mWeatherClient;
     private PreferenceCategory mUdfpsCategory;
 
@@ -105,6 +108,10 @@ public class LockScreenSettings extends SettingsPreferenceFragment implements
             prefSet.removePreference(mFingerprintSuccessVib);
             prefSet.removePreference(mFingerprintErrorVib);
         }
+
+       mSmartspace = (SwitchPreferenceCompat) findPreference(KEY_SMARTSPACE);
+       mSmartspace.setOnPreferenceChangeListener(this);
+
        mWeather = (Preference) findPreference(KEY_WEATHER);
        mWeatherClient = new OmniJawsClient(getContext());
        updateWeatherSettings();
@@ -126,16 +133,20 @@ public class LockScreenSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.FP_ERROR_VIBRATE, value ? 1 : 0);
             return true;
+        } else if (preference == mSmartspace) {
+            mSmartspace.setChecked((Boolean)newValue);
+            updateWeatherSettings();
+            return true;
         }
         return false;
     }
 
     private void updateWeatherSettings() {
-        if (mWeatherClient == null || mWeather == null) return;
+        if (mWeatherClient == null || mWeather == null || mSmartspace == null) return;
 
         boolean weatherEnabled = mWeatherClient.isOmniJawsEnabled();
-        mWeather.setEnabled(weatherEnabled);
-        mWeather.setSummary(weatherEnabled ? R.string.lockscreen_weather_summary :
+        mWeather.setEnabled(!mSmartspace.isChecked() && weatherEnabled);
+        mWeather.setSummary(!mSmartspace.isChecked() && weatherEnabled ? R.string.lockscreen_weather_summary :
             R.string.lockscreen_weather_enabled_info);
     }
 
