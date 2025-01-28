@@ -38,6 +38,12 @@
         android:title="@string/smart_pixels_title"
         android:fragment="com.power.hub.fragments.SmartPixels" />
 
+   <com.voltage.support.preferences.GlobalSettingSwitchPreference
+        android:key="heads_up_notifications_enabled"
+        android:title="@string/notification_heads_up_title"
+        android:summary="@string/notification_heads_up_summary"
+        android:defaultValue="true" />
+
     <com.voltage.support.preferences.SystemPropertySwitchPreference
         android:key="persist.sys.compact_heads_up_notification.always_show"
         android:title="@string/compact_heads_up_notifications_enabled_title"
