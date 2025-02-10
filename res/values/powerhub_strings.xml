@@ -530,4 +530,11 @@
     <string name="lockscreen_albumart_filter_blur">Blur</string>
     <string name="lockscreen_albumart_filter_grayblur">Grayscale and blurred</string>
 
+    <!-- Depth Wallpaper -->
+    <string name="dw_file_header_select_title">Select depth wallpaper subject</string>
+    <string name="dw_file_header_select_summary">Select depth wallpaper subject image from storage</string>
+    <string name="dw_wallpaper_enabled_title">Depth wallpaper</string>
+    <string name="dw_wallpaper_enabled_summary">Enable iOS-inspired depth wallpaper. Requires a subject image</string>
+    <string name="dw_wallpaper_opacity_title">Depth wallpaper opacity</string>
+
 </resources>
