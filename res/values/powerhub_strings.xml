@@ -537,4 +537,17 @@
     <string name="dw_wallpaper_enabled_summary">Enable iOS-inspired depth wallpaper. Requires a subject image</string>
     <string name="dw_wallpaper_opacity_title">Depth wallpaper opacity</string>
 
+    <!-- Lock screen/AOD custom image -->
+    <string name="lockscreen_custom_image_enabled_title">Enable Lockscreen AOD image</string>
+    <string name="lockscreen_custom_image_title">Lockscreen AOD image</string>
+    <string name="lockscreen_custom_image_summary">Set custom lockscreen AOD image</string>
+    <string name="lockscreen_custom_image_pick_summary">Select AOD image from gallery</string>
+    <string name="custom_aod_image_not_supported">Clock style not supported</string>
+    <!-- Lock screen/Custom Clock Style -->
+    <string name="ls_clock_face_highlight_text">Swipe left or right to preview clock styles</string>
+    <string name="ls_clock_custom_font_not_supported">Selected clock does not support custom fonts</string>
+    <string name="lockscreen_clock_category_title">Lockscreen clock</string>
+    <string name="lockscreen_clock_category_summary">Configure lockscreen clock styles</string>
+    <string name="custom_clock_style">Custom Clock style</string>
+
 </resources>
