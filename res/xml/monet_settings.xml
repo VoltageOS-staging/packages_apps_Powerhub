@@ -15,6 +15,21 @@
     android:title="@string/monet_settings_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
+<PreferenceCategory
+    android:title="@string/qs_blur_category_title">
+
+    <com.voltage.support.preferences.CustomSeekBarPreference
+        android:key="shade_blur_radius"
+        android:title="@string/shade_blur_radius_title"
+        android:summary="@string/shade_blur_radius_summary"
+        android:defaultValue="18"
+        settings:min="0"
+        android:max="40"
+        settings:interval="1"
+        settings:units="dp" />
+
+</PreferenceCategory>
+
         <!-- Wallpaper Settings -->
         <Preference
             android:key="wallpaper_settings"
