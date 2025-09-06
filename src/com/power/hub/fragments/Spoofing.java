@@ -6,6 +6,7 @@
 package com.power.hub.fragments;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -253,6 +254,30 @@ public class Spoofing extends SettingsPreferenceFragment implements
             .show();
     }
 
+    /**
+     * Kill packages that need to be restarted to pick up new PIF properties
+     */
+    private void killGMSPackages() {
+        try {
+            ActivityManager am = (ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE);
+            String[] packages = {
+                "com.google.android.apps.photos",
+                "com.google.android.gms",
+                "com.google.android.googlequicksearchbox",
+                "com.android.vending",
+                "com.snapchat.android"
+            };
+            for (String pkg : packages) {
+                am.getClass()
+                  .getMethod("forceStopPackage", String.class)
+                  .invoke(am, pkg);
+                Log.i(TAG, pkg + " process killed");
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to kill packages", e);
+        }
+    }
+
     private void updatePropertiesFromUrl(String urlString) {
         new Thread(() -> {
             try {
@@ -272,6 +297,7 @@ public class Spoofing extends SettingsPreferenceFragment implements
                     mHandler.post(() -> {
                         String toastMessage = getString(R.string.toast_spoofing_success, spoofedModel);
                         Toast.makeText(getContext(), toastMessage, Toast.LENGTH_LONG).show();
+                        killGMSPackages();
                     });
 
                 } finally {
@@ -283,9 +309,6 @@ public class Spoofing extends SettingsPreferenceFragment implements
                     Toast.makeText(getContext(), R.string.toast_spoofing_failure, Toast.LENGTH_LONG).show();
                 });
             }
-            mHandler.postDelayed(() -> {
-                SystemRestartUtils.showSystemRestartDialog(getContext());
-            }, 1250);
         }).start();
     }
 
@@ -302,13 +325,13 @@ public class Spoofing extends SettingsPreferenceFragment implements
                     Log.d(TAG, "Setting PIF property: persist.sys.pihooks_" + key + " = " + value);
                     SystemProperties.set("persist.sys.pihooks_" + key, value);
                 }
+                killGMSPackages();
+                Toast.makeText(getContext(), "PIF JSON loaded and packages refreshed", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             Log.e(TAG, "Error reading PIF JSON or setting properties", e);
+            Toast.makeText(getContext(), "Error loading PIF JSON", Toast.LENGTH_SHORT).show();
         }
-        mHandler.postDelayed(() -> {
-            SystemRestartUtils.showSystemRestartDialog(getContext());
-        }, 1250);
     }
 
     @Override
@@ -316,11 +339,14 @@ public class Spoofing extends SettingsPreferenceFragment implements
         final Context context = getContext();
         final ContentResolver resolver = context.getContentResolver();
         if (preference == mGmsSpoof
-            || preference == mGoogleSpoof
             || preference == mGphotosSpoof
-            || preference == mGamePropsSpoof
             || preference == mQsbSpoof
             || preference == mSnapSpoof) {
+            killGMSPackages();
+            return true;
+        }
+        if (preference == mGoogleSpoof
+            || preference == mGamePropsSpoof) {
             SystemRestartUtils.showSystemRestartDialog(getContext());
             return true;
         }
