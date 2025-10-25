@@ -19,6 +19,13 @@
             android:summary="@string/gms_spoof_summary"
             android:defaultValue="true" />
 
+	<com.voltage.support.preferences.SystemPropertySwitchPreference
+    	    android:key="persist.sys.pixelprops.integrity"
+    	    android:title="@string/spoofing_improve_integrity_title"
+    	    android:summary="@string/spoofing_improve_integrity_summary"
+    	    android:defaultValue="false"
+    	    android:dependency="persist.sys.pixelprops.gms" />
+
         <Preference
             android:key="show_pif_properties"
             android:title="@string/show_pif_properties_title"
