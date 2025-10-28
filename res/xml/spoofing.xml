@@ -65,6 +65,12 @@
             android:summary="@string/keybox_data_summary"
             android:defaultValue=""/>
 
+        <!-- Block attestation even with Keybox Data -->
+        <com.voltage.support.preferences.SystemPropertySwitchPreference
+            android:key="persist.sys.pixelprops.gmscertchain"
+            android:title="@string/pi_gmscertchain_title"
+            android:summary="@string/pi_gmscertchain_summary"
+            android:defaultValue="false" />
     </PreferenceCategory>
 
     <PreferenceCategory

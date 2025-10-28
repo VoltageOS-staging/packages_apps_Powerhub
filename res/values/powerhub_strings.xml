@@ -589,4 +589,6 @@
     <string name="spoofing_improve_integrity_title">Improve Play Integrity</string>
     <string name="spoofing_improve_integrity_summary">Blocks access to hardware certificate chains to attempt passing strong integrity checks.</string>
 
+    <string name="pi_gmscertchain_title">Disable forcing strong integrity</string>
+    <string name="pi_gmscertchain_summary">When enabled, do not enforce strong integrity from valid custom keybox and depend on Google Play Integrity spoof to fix apps like Google Pay</string>
 </resources>
