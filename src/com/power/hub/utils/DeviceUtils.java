@@ -188,4 +188,9 @@ public class DeviceUtils {
                 fingerprintManager.getSensorPropertiesInternal();
         return props != null && props.size() == 1 && props.get(0).isAnyUdfpsType();
     }
+
+    public static boolean isCurrentlySupportedPixel() {
+        boolean isPixelDevice = SystemProperties.get("ro.product.model").matches("Pixel (3|4|5|6|7|8|9|10)[a-zA-Z ]*");
+        return isPixelDevice;
+    }
 }
