@@ -19,6 +19,13 @@
             android:summary="@string/gms_spoof_summary"
             android:defaultValue="true" />
 
+        <!-- Play Store -->
+        <com.voltage.support.preferences.SystemPropertySwitchPreference
+            android:key="persist.sys.pp.finsky"
+            android:title="@string/spoofing_finsky_title"
+            android:summary="@string/spoofing_finsky_summary"
+            android:defaultValue="false" />
+
         <!-- Keybox Data -->
         <com.power.hub.fragments.KeyboxDataPreference
             android:key="keybox_data_setting"

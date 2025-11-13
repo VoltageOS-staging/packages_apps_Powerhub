@@ -79,6 +79,7 @@ public class Spoofing extends SettingsPreferenceFragment implements
     private static final String SYS_GMS_CERT_SPOOF = "persist.sys.pp.gmscertchain";
     private static final String SYS_GOOGLE_SPOOF = "persist.sys.pp";
     private static final String SYS_GAMES_SPOOF = "persist.sys.pp.games";
+    private static final String SYS_FINSKY_SPOOF = "persist.sys.pp.finsky";
     private static final String SYS_PHOTOS_SPOOF = "persist.sys.pp.photos";
     private static final String SYS_QSB_SPOOF = "persist.sys.pp.qsb";
     private static final String SYS_SNAPCHAT_SPOOF = "persist.sys.pp.snapchat";
@@ -95,6 +96,7 @@ public class Spoofing extends SettingsPreferenceFragment implements
     private SystemPropertySwitchPreference mGoogleSpoof;
     private SystemPropertySwitchPreference mGamesSpoof;
     private SystemPropertySwitchPreference mPhotosSpoof;
+    private SystemPropertySwitchPreference mFinskySpoof;
     private SystemPropertySwitchPreference mQsbSpoof;
     private SystemPropertySwitchPreference mSnapchatSpoof;
     private SystemPropertySwitchPreference mTensorSpoof;
@@ -115,6 +117,7 @@ public class Spoofing extends SettingsPreferenceFragment implements
         mSystemWideCategory = (PreferenceCategory) findPreference(KEY_SYSTEM_WIDE_CATEGORY);
         mGamesSpoof = (SystemPropertySwitchPreference) findPreference(SYS_GAMES_SPOOF);
         mPhotosSpoof = (SystemPropertySwitchPreference) findPreference(SYS_PHOTOS_SPOOF);
+        mFinskySpoof = (SystemPropertySwitchPreference) findPreference(SYS_FINSKY_SPOOF);
         mGmsSpoof = (SystemPropertySwitchPreference) findPreference(SYS_GMS_SPOOF);
         mGoogleSpoof = (SystemPropertySwitchPreference) findPreference(SYS_GOOGLE_SPOOF);
         mPifJsonFilePreference = findPreference(KEY_PIF_JSON_FILE_PREFERENCE);
@@ -142,6 +145,7 @@ public class Spoofing extends SettingsPreferenceFragment implements
         mGoogleSpoof.setOnPreferenceChangeListener(this);
         mPhotosSpoof.setOnPreferenceChangeListener(this);
         mGamesSpoof.setOnPreferenceChangeListener(this);
+        mFinskySpoof.setOnPreferenceChangeListener(this);
         mQsbSpoof.setOnPreferenceChangeListener(this);
         mSnapchatSpoof.setOnPreferenceChangeListener(this);
         mTensorSpoof.setOnPreferenceChangeListener(this);
@@ -341,7 +345,8 @@ public class Spoofing extends SettingsPreferenceFragment implements
         if (preference == mGmsSpoof
             || preference == mPhotosSpoof
             || preference == mQsbSpoof
-            || preference == mSnapchatSpoof) {
+            || preference == mSnapchatSpoof
+            || preference == mFinskySpoof) {
             killGMSPackages();
             return true;
         }

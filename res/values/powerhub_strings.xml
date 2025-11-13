@@ -595,4 +595,6 @@
     <string name="homepage_toast_text_title">Custom message</string>
     <string name="homepage_toast_text_summary">Set a personal message to display</string>
 
+    <string name="spoofing_finsky_title">Play Store spoofing</string>
+    <string name="spoofing_finsky_summary">Spoof properties for the Play Store to help pass integrity</string>
 </resources>
