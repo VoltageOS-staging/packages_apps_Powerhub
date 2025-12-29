@@ -349,7 +349,7 @@
 
     <!-- Battery customizations -->
     <string-array name="status_bar_battery_style_entries" translatable="false">
-        <item>@string/battery_style_port</item>
+        <item>@string/battery_style_landscape</item>
         <item>@string/battery_style_circle</item>
         <item>@string/battery_style_text</item>
     </string-array>
