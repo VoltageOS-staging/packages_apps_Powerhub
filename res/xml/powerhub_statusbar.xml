@@ -22,7 +22,6 @@
         </Preference>
 
     <Preference
-<<<<<<< HEAD
         android:key="clock"
         android:title="@string/status_bar_clock_title"
         android:summary="@string/status_bar_clock_summary"
@@ -67,10 +66,10 @@
         android:title="@string/ongoing_progress_settings_title"
         android:summary="@string/ongoing_progress_settings_summary"
         android:fragment="com.power.hub.fragments.OngoingProgressBar" />
-=======
+
+    <Preference
         android:key="battery_bar_category"
         android:fragment="com.power.hub.fragments.BatterySettings"
         android:title="@string/battery_settings_title" />
->>>>>>> bba5506 (Powerhub: Battery Customizations)
 
 </PreferenceScreen>
