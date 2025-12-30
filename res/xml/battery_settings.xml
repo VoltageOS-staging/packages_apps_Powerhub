@@ -19,11 +19,6 @@
 
     <PreferenceCategory
         android:title="@string/battery_options">
-        <com.voltage.support.preferences.SystemSettingSwitchPreference
-            android:key="status_bar_show_battery_percent"
-            android:title="@string/battery_percent_title"
-            android:summary="@string/battery_percent_summary"
-            android:defaultValue="false" />
         <com.voltage.support.preferences.SystemSettingListPreference
             android:key="status_bar_battery_style"
             android:title="@string/battery_style_title"
@@ -31,6 +26,13 @@
             android:entries="@array/status_bar_battery_style_entries"
             android:entryValues="@array/status_bar_battery_style_values"
             android:defaultValue="0" />
-
+        <com.voltage.support.preferences.SystemSettingListPreference
+            android:key="status_bar_show_battery_percent"
+            android:title="@string/status_bar_battery_percent_title"
+            android:dialogTitle="@string/status_bar_battery_percent_title"
+            android:entries="@array/status_bar_battery_percent_entries"
+            android:entryValues="@array/status_bar_battery_percent_values"
+            android:defaultValue="0"
+            android:summary="%s" />
     </PreferenceCategory>
 </PreferenceScreen>

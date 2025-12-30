@@ -18,7 +18,9 @@ package com.power.hub.fragments;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
+import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -29,12 +31,20 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import com.voltage.support.preferences.SystemSettingListPreference;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
 public class BatterySettings extends SettingsPreferenceFragment
             implements Preference.OnPreferenceChangeListener  {
+
+    private static final String BATTERY_STYLE = "status_bar_battery_style";
+    private static final String SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
+
+    private SystemSettingListPreference mBatteryStyle;
+    private SystemSettingListPreference mBatteryPercent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,12 +54,51 @@ public class BatterySettings extends SettingsPreferenceFragment
 
         PreferenceScreen prefSet = getPreferenceScreen();
         ContentResolver resolver = getActivity().getContentResolver();
+
+        mBatteryStyle = (SystemSettingListPreference) findPreference(BATTERY_STYLE);
+        int batteryStyle = Settings.System.getIntForUser(resolver,
+                BATTERY_STYLE, 0, UserHandle.USER_CURRENT);
+        mBatteryStyle.setValue(String.valueOf(batteryStyle));
+        mBatteryStyle.setSummary(mBatteryStyle.getEntry());
+        mBatteryStyle.setOnPreferenceChangeListener(this);
+
+        mBatteryPercent = (SystemSettingListPreference) findPreference(SHOW_BATTERY_PERCENT);
+        int percentValue = Settings.System.getIntForUser(resolver,
+                SHOW_BATTERY_PERCENT, 0, UserHandle.USER_CURRENT);
+        mBatteryPercent.setValue(String.valueOf(percentValue));
+        mBatteryPercent.setSummary(mBatteryPercent.getEntry());
+        mBatteryPercent.setOnPreferenceChangeListener(this);
+
+        boolean isText = batteryStyle == 2;
+        if (isText) {
+             mBatteryPercent.setEnabled(false);
+        }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        ContentResolver resolver = getActivity().getContentResolver();
+
+        if (preference == mBatteryStyle) {
+            int value = Integer.parseInt((String) newValue);
+            int index = mBatteryStyle.findIndexOfValue((String) newValue);
+            mBatteryStyle.setSummary(mBatteryStyle.getEntries()[index]);
+            Settings.System.putIntForUser(resolver,
+                    BATTERY_STYLE, value, UserHandle.USER_CURRENT);
+            
+            mBatteryPercent.setEnabled(value != 2);
+            return true;
+
+        } else if (preference == mBatteryPercent) {
+            int value = Integer.parseInt((String) newValue);
+            int index = mBatteryPercent.findIndexOfValue((String) newValue);
+            mBatteryPercent.setSummary(mBatteryPercent.getEntries()[index]);
+            Settings.System.putIntForUser(resolver,
+                    SHOW_BATTERY_PERCENT, value, UserHandle.USER_CURRENT);
+            return true;
+        }
         return false;
-    }  
+    } 
     
     @Override
     public int getMetricsCategory() {
