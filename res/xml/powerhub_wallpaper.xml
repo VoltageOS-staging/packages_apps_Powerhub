@@ -56,6 +56,35 @@
             android:max="100"
             android:min="1" />
     </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="atmosphere_category"
+            android:title="Atmosphere Effect">
+
+            <com.voltage.support.preferences.SystemSettingSwitchPreference
+                android:key="atmosphere_enabled"
+                android:title="Enable Atmosphere"
+                android:summary="Simulates ambient light, micro-motion, and depth on your wallpaper."
+                android:defaultValue="false" />
+
+            <com.voltage.support.preferences.SystemSettingListPreference
+                android:key="atmosphere_style"
+                android:title="Effect Style"
+                android:summary="Choose how the effect behaves between the Lockscreen and Homescreen."
+                android:entries="@array/atmosphere_style_entries"
+                android:entryValues="@array/atmosphere_style_values"
+                android:defaultValue="0"
+                android:dependency="atmosphere_enabled" />
+
+            <com.voltage.support.preferences.SystemSettingSeekBarPreference
+                android:key="atmosphere_intensity"
+                android:title="Effect Intensity"
+                android:max="100"
+                android:min="10"
+                android:defaultValue="50"
+                android:dependency="atmosphere_enabled" />
+
+    </PreferenceCategory>
     <com.android.settingslib.widget.FooterPreference
         android:key="wallpaper_styles_footer"
         android:title="@string/wallpaper_styles_footer"
