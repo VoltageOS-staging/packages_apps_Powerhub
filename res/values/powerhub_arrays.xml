@@ -396,4 +396,21 @@
          <item>com.android.launcher3</item>
      </string-array>
 
+    <string-array name="haze_effects_style_entries">
+        <item>Standard Atmosphere</item>
+        <item>Reverse Atmosphere</item>
+        <item>Simple Frosted</item>
+        <item>Reverse Frosted</item>
+        <item>Double Haze (Haze->Sharp Lock, Sharp->Haze Home)</item>
+        <item>Vertical Melt (Melt Lock, Sharp Home)</item>
+    </string-array>
+
+    <string-array name="haze_effects_style_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
 </resources>
